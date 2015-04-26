@@ -1,0 +1,48 @@
+Central Limit Theoreme demonstration
+========================================================
+author: Danut Bancea
+date: `r date()` 
+
+Central Limit Theorem definition
+========================================================
+
+The Central Limit Theorem states that sums and averages of measurements from a non normal population with finite mean and a standard deviation s have approximately normal distributions for large samples of size n.
+
+Application description
+========================================================
+
+The application will demonstrate how the distribution of the samples mean will have a normal distribution based on the sample size and number of samples.
+
+To make things more interactive the change of the sample size, number of samples and the distribution size will be done dynamically to notice very easily how the distribution of samples mean will change conform with the central limit theorem.
+
+To see the Central Lmit Theoreme at work the next two slides will plot a histogram for an exponential distribution and the samples mean histogram for 1000 samples with the size of 64 observations per sample.
+
+
+Generate exponential distribution and plot the histogram
+========================================================
+Generate an exponential distribution with 4000 observation and plot the histogram of the distribution.
+
+```{r, echo=FALSE}
+exp_dist <- rexp(4000);
+hist(exp_dist, freq=FALSE, main="Histogram for exponential distribution", xlab="value", ylab="Density")
+```
+
+Sample the previous distribution
+========================================================
+Sample the previous distribution for 1000 times with a sample size or 64 observations,
+calculate the mean of each sample and create a histogram of the means.
+
+```{r, echo=FALSE}
+samples <- 1000;
+sample_size <- 64;
+v_s <- vector();
+for (i in 1:samples){
+  v_s[i] <- mean(sample(exp_dist,size=sample_size, replace=FALSE))
+};
+pop_mean <- mean(exp_dist);
+pop_sd <- sd(exp_dist);
+sampmean_mean <- mean(v_s);
+hist(v_s, freq=FALSE, breaks=20, main="Sample mean histogram", xlab="Value", ylab="Density");
+x <- seq(from=min(v_s), to=max(v_s), by=(max(v_s)-min(v_s))/100);
+lines(x, dnorm(x, mean=pop_mean, sd=pop_sd/sqrt(sample_size)), col="blue", lwd=2);
+```
