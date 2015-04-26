@@ -19,10 +19,10 @@ shinyServer(
     })  
     output$newHist <- renderPlot({
       switch(input$dist,
-             "Uniform" = hist(v_dist(), freq=FALSE, main="Histogram for uniform distribution", xlab="value", ylab="Relative freq."),
-             "Exponential" = hist(v_dist(), freq=FALSE, main="Histogram for exponential distribution", xlab="value", ylab="Relative freq."),
-             "Poisson" = hist(v_dist(), freq=FALSE, main="Histogram for Poisson distribution", xlab="value", ylab="Relative freq."),
-             "Normal" = hist(v_dist(), freq=FALSE, main="Histogram for normal distribution", xlab="value", ylab="Relative freq.")
+             "Uniform" = hist(v_dist(), freq=FALSE, main="Histogram for uniform distribution", xlab="value", ylab="Density"),
+             "Exponential" = hist(v_dist(), freq=FALSE, main="Histogram for exponential distribution", xlab="value", ylab="Density"),
+             "Poisson" = hist(v_dist(), freq=FALSE, main="Histogram for Poisson distribution", xlab="value", ylab="Density"),
+             "Normal" = hist(v_dist(), freq=FALSE, main="Histogram for normal distribution", xlab="value", ylab="Density")
       )
     })
     v_samp <- reactive ({
